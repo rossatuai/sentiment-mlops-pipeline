@@ -21,6 +21,11 @@ df = pd.read_csv(
     "data/processed/cleaned_data.csv"
 )
 
+
+# Create validation dataset for monitoring
+df.sample(100).to_csv("data/validation.csv", index=False)
+
+
 X = df["cleaned_review"]
 y = df["sentiment"]
 
