@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: sentiment-api-deployment
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: sentiment-api
+
+  template:
+    metadata:
+      labels:
+        app: sentiment-api
+
+    spec:
+      containers:
+      - name: sentiment-api
+        image: sentiment-api:latest
+        imagePullPolicy: Never
+
+        ports:
+        - containerPort: 5000
