@@ -1,0 +1,8 @@
+artifact_location: file:///C:/Users/rossm/Downloads/ATU College/BDA/sentiment-mlops-pipeline/mlruns/387054086768410003
+creation_time: 1778798599663
+experiment_id: '387054086768410003'
+last_update_time: 1778798599663
+lifecycle_stage: active
+name: Sentiment Analysis
+trace_location: null
+workspace: default

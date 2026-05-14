@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/rossm/Downloads/ATU College/BDA/sentiment-mlops-pipeline/mlruns/387054086768410003/18d035713fca416aaa0b806b50147839/artifacts
+end_time: 1778799209334
+entry_point_name: ''
+experiment_id: '387054086768410003'
+lifecycle_stage: active
+run_id: 18d035713fca416aaa0b806b50147839
+run_name: adventurous-dog-3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1778799187439
+status: 3
+tags: []
+user_id: rossm

@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/rossm/Downloads/ATU College/BDA/sentiment-mlops-pipeline/mlruns/387054086768410003/381d5c305b5f4c3abc6a5b7e40d5552c/artifacts
+end_time: 1778798637727
+entry_point_name: ''
+experiment_id: '387054086768410003'
+lifecycle_stage: active
+run_id: 381d5c305b5f4c3abc6a5b7e40d5552c
+run_name: learned-rook-557
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1778798618119
+status: 3
+tags: []
+user_id: rossm
