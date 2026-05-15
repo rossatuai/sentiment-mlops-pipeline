@@ -8,9 +8,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
@@ -19,9 +21,6 @@ jobs:
 
       - name: Train Model
         run: python src/train.py
-
-      - name: Debug Files
-        run: ls -R
 
       - name: Upload Trained Model Artifact
         uses: actions/upload-artifact@v4
@@ -39,5 +38,14 @@ jobs:
         with:
           name: trained-model
 
-      - name: Verify Artifact
-        run: ls -R
+      - name: Verify file exists
+        run: |
+          if [ -f model.pkl ]; then
+            echo "Model artifact found"
+          else
+            echo "Model artifact missing"
+            exit 1
+          fi
+
+      - name: Display artifact details
+        run: ls -la
