@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: trained-model
-          path: models/model.pkl
+          path: models/sentiment_model.pkl
 
   verify-artifact:
     runs-on: ubuntu-latest
