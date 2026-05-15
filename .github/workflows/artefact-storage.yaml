@@ -1,0 +1,34 @@
+name: Arefacts
+
+on: workflow_dispatch
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Build project
+        run: |
+          mkdir dist
+          echo "Arefact Demo for CA3" > dist/output.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: build-files
+          path: dist/
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build   
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v6
+        with:
+          name: build-files
+          path: dist/
+
+      - name: Use artifact
+        run: cat dist/output.txt
