@@ -43,7 +43,7 @@ jobs:
 
       - name: Verify file exists
         run: |
-          if [ -f model.pkl ]; then
+          if [ -f sentiment_model.pkl ]; then
             echo "Model artifact found"
           else
             echo "Model artifact missing"
