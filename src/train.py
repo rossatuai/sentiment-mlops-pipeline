@@ -3,6 +3,7 @@ import joblib
 import json
 import mlflow
 import mlflow.sklearn
+import os
 
 
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -82,6 +83,10 @@ with mlflow.start_run():
     #    model,
     #    "model"
     #)
+
+
+os.makedirs("models", exist_ok=True)
+
 
 joblib.dump(
     model,
