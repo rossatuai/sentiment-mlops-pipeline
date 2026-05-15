@@ -78,10 +78,10 @@ with mlflow.start_run():
         f1
     )
 
-    mlflow.sklearn.log_model(
-        model,
-        "model"
-    )
+    # mlflow.sklearn.log_model(
+    #    model,
+    #    "model"
+    #)
 
 joblib.dump(
     model,
