@@ -3,4 +3,5 @@ __pycache__/
 ignore/
 data/
 models/
+mlruns/
 *.pyc

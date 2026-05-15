@@ -3,6 +3,7 @@ import joblib
 import json
 import mlflow
 import mlflow.sklearn
+import os
 
 
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -20,6 +21,11 @@ mlflow.set_experiment("Sentiment Analysis")
 df = pd.read_csv(
     "data/processed/cleaned_data.csv"
 )
+
+
+# Create validation dataset for monitoring
+df.sample(100).to_csv("data/validation.csv", index=False)
+
 
 X = df["cleaned_review"]
 y = df["sentiment"]
@@ -73,10 +79,14 @@ with mlflow.start_run():
         f1
     )
 
-    mlflow.sklearn.log_model(
-        model,
-        "model"
-    )
+    # mlflow.sklearn.log_model(
+    #    model,
+    #    "model"
+    #)
+
+
+os.makedirs("models", exist_ok=True)
+
 
 joblib.dump(
     model,

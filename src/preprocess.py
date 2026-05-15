@@ -2,6 +2,8 @@ import pandas as pd
 import re
 import nltk
 from nltk.corpus import stopwords
+import os
+
 
 nltk.download('stopwords')
 
@@ -24,6 +26,9 @@ def clean_text(text):
 df = pd.read_csv("data/raw/imdb_dataset.csv")
 
 df["cleaned_review"] = df["review"].apply(clean_text)
+
+
+os.makedirs("data/processed", exist_ok=True)
 
 df.to_csv(
     "data/processed/cleaned_data.csv",
