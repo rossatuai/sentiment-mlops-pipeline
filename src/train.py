@@ -79,10 +79,10 @@ with mlflow.start_run():
         f1
     )
 
-    mlflow.sklearn.log_model(
-        model,
-        "model"
-    )
+    # mlflow.sklearn.log_model(
+    #    model,
+    #    "model"
+    #)
 
 
 os.makedirs("models", exist_ok=True)
