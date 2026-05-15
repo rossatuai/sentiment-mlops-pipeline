@@ -19,6 +19,9 @@ jobs:
       - name: Install Dependencies
         run: pip install -r requirements.txt
 
+      - name: Run preprocessing
+        run: python src/preprocess.py
+
       - name: Train Model
         run: python src/train.py
 
@@ -46,6 +49,3 @@ jobs:
             echo "Model artifact missing"
             exit 1
           fi
-
-      - name: Display artifact details
-        run: ls -la
