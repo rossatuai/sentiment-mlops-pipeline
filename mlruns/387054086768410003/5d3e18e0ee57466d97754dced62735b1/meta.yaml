@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/rossm/Downloads/ATU College/BDA/sentiment-mlops-pipeline/mlruns/387054086768410003/5d3e18e0ee57466d97754dced62735b1/artifacts
+end_time: 1778801712023
+entry_point_name: ''
+experiment_id: '387054086768410003'
+lifecycle_stage: active
+run_id: 5d3e18e0ee57466d97754dced62735b1
+run_name: luminous-worm-424
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1778801703642
+status: 3
+tags: []
+user_id: rossm

@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/rossm/Downloads/ATU College/BDA/sentiment-mlops-pipeline/mlruns/387054086768410003/a0a52878607c4bf4abc3b31537fd36af/artifacts
+end_time: 1778800711277
+entry_point_name: ''
+experiment_id: '387054086768410003'
+lifecycle_stage: active
+run_id: a0a52878607c4bf4abc3b31537fd36af
+run_name: enchanting-panda-522
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1778800693271
+status: 3
+tags: []
+user_id: rossm

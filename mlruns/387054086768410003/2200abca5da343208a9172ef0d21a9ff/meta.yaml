@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/rossm/Downloads/ATU College/BDA/sentiment-mlops-pipeline/mlruns/387054086768410003/2200abca5da343208a9172ef0d21a9ff/artifacts
+end_time: 1778807009867
+entry_point_name: ''
+experiment_id: '387054086768410003'
+lifecycle_stage: active
+run_id: 2200abca5da343208a9172ef0d21a9ff
+run_name: puzzled-kite-0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1778807001616
+status: 3
+tags: []
+user_id: rossm

@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/rossm/Downloads/ATU%20College/BDA/sentiment-mlops-pipeline/mlruns/567836024221638001/e08f02ba3ef0442a9ff4b1beb5552f21/artifacts
+end_time: 1778801712549
+entry_point_name: ''
+experiment_id: '567836024221638001'
+lifecycle_stage: active
+run_id: e08f02ba3ef0442a9ff4b1beb5552f21
+run_name: traveling-colt-192
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1778801682541
+status: 3
+tags: []
+user_id: rossm
