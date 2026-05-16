@@ -3,13 +3,14 @@ kind: Application
 
 metadata:
   name: sentiment-api
+  namespace: argocd
 
 spec:
   project: default
 
   source:
     repoURL: https://github.com/rossatuai/sentiment-mlops-pipeline.git
-    targetRevision: main
+    targetRevision: feature/argocd-testing
     path: k8s
 
   destination:
