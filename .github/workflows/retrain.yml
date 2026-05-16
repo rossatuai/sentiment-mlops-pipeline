@@ -24,5 +24,8 @@ jobs:
       - name: Install Dependencies
         run: pip install -r requirements.txt
 
+      - name: Generate Validation Data
+        run: python src/preprocess.py
+
       - name: Run Monitoring and Retraining Script
         run: python src/monitor_and_retrain.py
