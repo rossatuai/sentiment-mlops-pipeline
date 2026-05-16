@@ -2,7 +2,7 @@ from evaluate import evaluate_model
 import subprocess
 import mlflow
 
-THRESHOLD = 0.99
+THRESHOLD = 0.80
 
 # Use same MLflow location as training
 mlflow.set_tracking_uri("file:./mlruns")

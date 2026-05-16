@@ -1,8 +1,0 @@
-artifact_location: file:///C:/Users/rossm/Downloads/ATU%20College/BDA/sentiment-mlops-pipeline/mlruns/567836024221638001
-creation_time: 1778801452449
-experiment_id: '567836024221638001'
-last_update_time: 1778801452449
-lifecycle_stage: active
-name: model-monitoring
-trace_location: null
-workspace: default
