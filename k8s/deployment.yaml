@@ -20,6 +20,7 @@ spec:
       containers:
       - name: sentiment-api
         image: rossatuai/sentiment-api:latest
+        imagePullPolicy: Always
 
         ports:
         - containerPort: 5000
