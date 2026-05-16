@@ -27,5 +27,8 @@ jobs:
       - name: Generate Validation Data
         run: python src/preprocess.py
 
+      - name: Train Model
+        run: python src/train.py
+
       - name: Run Monitoring and Retraining Script
         run: python src/monitor_and_retrain.py
