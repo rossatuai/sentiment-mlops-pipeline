@@ -5,7 +5,7 @@ metadata:
   name: sentiment-api
 
 spec:
-  replicas: 1
+  replicas: 2
 
   selector:
     matchLabels:
@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: sentiment-api
-        image: rossatuai/sentiment-api:latest
+        image: rossatuai/sentiment-api:v1.0
 
         ports:
         - containerPort: 5000
