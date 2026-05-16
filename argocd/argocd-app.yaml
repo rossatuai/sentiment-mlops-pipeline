@@ -10,7 +10,7 @@ spec:
 
   source:
     repoURL: https://github.com/rossatuai/sentiment-mlops-pipeline.git
-    targetRevision: feature/argocd-testing
+    targetRevision: main
     path: k8s
 
   destination:
