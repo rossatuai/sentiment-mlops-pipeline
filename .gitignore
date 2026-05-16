@@ -2,6 +2,5 @@ archive.zip
 __pycache__/
 ignore/
 data/
-models/
 mlruns/
 *.pyc
