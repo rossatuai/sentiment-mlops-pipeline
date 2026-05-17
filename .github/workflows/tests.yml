@@ -24,11 +24,13 @@ jobs:
       run: |
         pip install -r requirements.txt
 
+
+    - name: Run Pytest
+      run: pytest
+
     - name: Preprocess Data
       run: python src/preprocess.py
 
     - name: Train Model
       run: python src/train.py
 
-    - name: Run Pytest
-      run: pytest
