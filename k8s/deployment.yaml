@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: sentiment-api
-        image: rossatuai/sentiment-api:33
+        image: rossatuai/sentiment-api:34
         imagePullPolicy: Always
 
         ports:
