@@ -17,7 +17,7 @@ vectorizer = joblib.load(
 
 @app.route("/")
 def home():
-    return "Sentiment API Running - Final Test"
+    return "Sentiment API Running - The Last Test"
 
 
 
