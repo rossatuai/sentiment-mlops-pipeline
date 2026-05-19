@@ -1,384 +1,377 @@
-
-# Start MLflow UI 
-python -m mlflow ui --port 5001
-
-
-
 # Sentiment Analysis MLOps Pipeline
 
-An end-to-end MLOps pipeline for sentiment analysis built using Python, GitHub Actions, Docker, MLflow, Kubernetes (Kind), and ArgoCD.
+End-to-end MLOps pipeline for sentiment analysis demonstrating automation across the complete machine learning lifecycle using GitHub Actions, MLflow, Docker, Kubernetes (Kind), and ArgoCD.
 
-This project demonstrates how machine learning models can move from development to production through automated workflows including training, testing, containerization, deployment, continuous integration, continuous delivery, and continuous retraining.
+The project focuses on MLOps practices including Continuous Integration (CI), Continuous Delivery (CD), Continuous Training (CT), experiment tracking, deployment automation, and model monitoring.
 
 ---
 
-## Project Overview
+# Project Overview
 
-The goal of this project is to demonstrate MLOps principles by creating a complete automated machine learning workflow rather than focusing only on model development.
+This project demonstrates how machine learning systems move from development into production through automated workflows.
 
-The system performs sentiment classification on text inputs and automatically manages the machine learning lifecycle.
-
-Features include:
+The system performs sentiment classification on text reviews while automating:
 
 - Data preprocessing
-- Model training and testing
+- Model training
+- Model evaluation
 - MLflow experiment tracking
-- Flask API deployment
-- Docker containerization
-- GitHub Actions automation
-- Continuous Integration (CI)
-- Continuous Delivery (CD)
-- Continuous Training (CT)
-- Kubernetes deployment using Kind
-- GitOps deployment using ArgoCD
+- Unit testing
+- Docker image creation
+- Continuous deployment
+- Model monitoring
+- Automatic retraining
+- Kubernetes deployment
+- GitOps synchronization
 
 ---
 
-## Project Architecture
+# Final Architecture Workflow
 
 ```text
-User Input
-     ↓
-Flask API
-     ↓
-Trained Sentiment Model
-     ↓
-Prediction Returned
-
-Development Workflow:
-
-Code Push
-     ↓
+Developer
+    ↓
+GitHub Repository
+    ↓
 GitHub Actions
-     ↓
-Run Tests
-     ↓
-Train/Retrain Model
-     ↓
-Log Results to MLflow
-     ↓
-Build Docker Image
-     ↓
-Push Image to DockerHub
-     ↓
-Update Kubernetes Manifest
-     ↓
-ArgoCD Detects Change
-     ↓
-Sync to Kind Cluster
-     ↓
-Application Updated
+    ↓
+Unit Tests (Pytest)
+    ↓
+Data Preprocessing
+    ↓
+Model Training
+    ↓
+MLflow Experiment Tracking
+    ↓
+Model Evaluation
+    ↓
+Performance Threshold Check
+
+      Accuracy < 0.80 ?
+
+      ↓ YES                        ↓ NO
+
+Automatic Retraining         Build Docker Image
+      ↓                             ↓
+Train Updated Model          Push to DockerHub
+      ↓                             ↓
+Log Results to MLflow        Update Kubernetes Manifest
+      ↓                             ↓
+      └────────────→ ArgoCD Detects Changes
+                                  ↓
+                        Sync Kind Cluster
+                                  ↓
+                           Flask API Updated
 ```
 
 ---
 
-## Tech Stack
+# Technology Stack
 
-### Machine Learning
+## Machine Learning
 
 - Python
 - Scikit-learn
-- TF-IDF Vectorizer
+- TF-IDF Vectorization
 - Logistic Regression
 
-### MLOps
+## MLOps
 
-- MLflow
 - GitHub Actions
+- MLflow
 - Docker
 - DockerHub
 - Kubernetes (Kind)
 - ArgoCD
 
-### API
+## API
 
 - Flask
 
-### Testing
+## Testing
 
 - Pytest
 
 ---
 
-## Repository Structure
+# Repository Structure
 
 ```text
-sentiment-mlops-pipeline/
+Sentiment-Small/
 
-│
 ├── .github/
 │   └── workflows/
-│       ├── train.yml
-│       ├── deploy.yml
-│       └── retrain.yml
+│       ├── artifact-storage.yml
+│       ├── dockerhub.yml
+│       ├── mlops-pipeline.yml
+│       ├── retrain.yml
+│       └── tests.yml
 │
-├── kubernetes/
+├── app/
+│   ├── app.py
+│   └── __init__.py
+│
+├── src/
+│   ├── preprocess.py
+│   ├── train.py
+│   ├── predict.py
+│   ├── evaluate.py
+│   └── monitor_and_retrain.py
+│
+├── tests/
+│   └── test_api.py
+│
+├── models/
+│   ├── sentiment_model.pkl
+│   ├── tfidf_vectorizer.pkl
+│   └── metrics.json
+│
+├── k8s/
 │   ├── deployment.yaml
 │   └── service.yaml
 │
-├── tests/
-│   ├── test_model.py
-│   └── test_api.py
+├── argocd/
+│   └── argocd-app.yaml
 │
-├── app.py
-├── train.py
-├── retrain.py
 ├── Dockerfile
 ├── requirements.txt
-├── mlruns/
-├── models/
 └── README.md
 ```
 
 ---
 
-## MLOps Pipeline Stages
+# Pipeline Stages
 
-### 1. Data Acquisition & Preprocessing
+## 1. Data Acquisition & Preprocessing
 
-The dataset is loaded and cleaned before being transformed using TF-IDF vectorization.
+The preprocessing stage:
 
-Steps:
-
-- Load sentiment dataset
-- Clean text
-- Remove invalid values
-- Split into train/test datasets
-- Transform text into numerical features
+- Loads sentiment data
+- Cleans text data
+- Removes missing values
+- Creates validation data
+- Converts text into TF-IDF vectors
 
 ---
 
-### 2. Model Training & Testing
+## 2. Model Training
 
-A Logistic Regression model is trained on processed text data.
+The sentiment model is trained automatically using GitHub Actions.
 
-Model outputs:
+Outputs:
 
-- Sentiment prediction
-- Accuracy
-- F1 score
+- Trained model
+- Accuracy score
+- Performance metrics
 
-The project focuses on operationalization rather than model experimentation.
+The focus of this project is on model operationalization rather than model optimization.
 
 ---
 
-### 3. MLflow Experiment Tracking
+## 3. MLflow Experiment Tracking
 
 MLflow tracks:
 
-- Accuracy metrics
-- F1 score
+- Accuracy
 - Hyperparameters
+- Training runs
 - Model artifacts
-
-This allows comparison between model runs and enables reproducibility.
-
-To start MLflow locally:
-
-```bash
-mlflow ui
-```
-
-Open:
-
-```bash
-http://localhost:5000
-```
-
----
-
-## Continuous Integration (CI)
-
-GitHub Actions automatically runs when code is pushed.
-
-CI workflow:
-
-- Install dependencies
-- Run unit tests
-- Validate project files
-- Train model
-- Log results to MLflow
-
-Benefits:
-
-- Prevents broken code entering production
-- Automatically validates updates
-
----
-
-## Continuous Delivery (CD)
-
-After successful testing:
-
-1. Docker image is built
-2. Image pushed to DockerHub
-3. Kubernetes deployment file updated
-4. ArgoCD detects changes
-5. Cluster automatically updates
-
----
-
-## Continuous Training (CT)
-
-The project supports automatic retraining.
-
-Retraining is triggered when:
-
-- Model performance drops below a threshold
-- Dataset changes
-- Configuration changes
-
-Retraining workflow:
-
-```text
-Performance Threshold Trigger
-            ↓
-GitHub Actions Retraining Workflow
-            ↓
-Train New Model
-            ↓
-Log to MLflow
-            ↓
-Build New Docker Image
-            ↓
-Deploy Updated Model
-```
-
----
-
-## Docker Deployment
-
-Build image:
-
-```bash
-docker build -t sentiment-api .
-```
+- Retraining status
 
 Run locally:
 
 ```bash
-docker run -p 5000:5000 sentiment-api
+python -m mlflow ui --port 5001
 ```
 
-Application:
+Open:
 
-```bash
-http://localhost:5000
+```text
+http://localhost:5001
 ```
 
 ---
 
-## Kubernetes Deployment (Kind)
+# Continuous Integration (CI)
 
-Create cluster:
+Triggered on:
 
-```bash
-kind create cluster --name sentiment-cluster
+- main
+- develop
+- feature/*
+
+CI process:
+
+1. Install dependencies
+2. Run Pytest tests
+3. Preprocess data
+4. Train model
+
+Unit tests include:
+
+- Home endpoint validation
+- Invalid route handling
+- Prediction endpoint testing
+
+Purpose:
+
+- Detect failures before deployment
+- Ensure code quality
+
+---
+
+# Continuous Delivery (CD)
+
+After successful workflow execution:
+
+1. Docker image builds automatically
+2. Image pushed to DockerHub
+3. Kubernetes deployment manifest updated
+4. ArgoCD detects Git changes
+5. Kind cluster updates automatically
+
+---
+
+# Continuous Training (CT)
+
+Model monitoring evaluates performance using a validation dataset.
+
+Current threshold:
+
+```python
+THRESHOLD = 0.80
 ```
 
-Apply manifests:
+Workflow:
 
-```bash
-kubectl apply -f kubernetes/
+```text
+Evaluate Model
+      ↓
+Accuracy below threshold?
+      ↓
+Yes
+      ↓
+Trigger Retraining
+      ↓
+Log metrics to MLflow
+      ↓
+Deploy updated model
 ```
 
-Check deployment:
+Retraining also runs automatically every:
+
+```text
+6 hours
+```
+
+---
+
+# Model Artifact Storage
+
+A dedicated workflow stores trained model artifacts.
+
+Stored artifacts:
+
+- sentiment_model.pkl
+- tfidf_vectorizer.pkl
+
+Purpose:
+
+- Model reproducibility
+- Version tracking
+- Easier deployment
+
+---
+
+# Kubernetes Deployment
+
+The application is deployed through:
+
+- Deployment
+- Service
+- Kind Cluster
+
+Useful commands:
+
+Deploy:
+
+```bash
+kubectl apply -f k8s/
+```
+
+Check resources:
 
 ```bash
 kubectl get all
 ```
 
+Demonstrate self-healing:
+
+```bash
+kubectl delete pod <pod-name>
+```
+
+Kubernetes automatically recreates deleted pods.
+
 ---
 
-## GitOps Deployment with ArgoCD
+# GitOps with ArgoCD
 
-ArgoCD continuously watches the Git repository.
+ArgoCD continuously monitors GitHub.
 
-When GitHub Actions updates deployment files:
+When deployment manifests change:
 
-- ArgoCD detects changes
-- Synchronizes Kubernetes automatically
-- Updates running containers
+- Detects updates
+- Synchronizes cluster state
+- Applies deployment automatically
 
-Advantages:
+Benefits:
 
-- Automated deployments
-- Reduced manual intervention
 - Git becomes source of truth
+- Automated deployment
 - Easy rollback capability
 
 ---
 
-## Branching Strategy
+# Branching Strategy
 
-This project uses a simple Git workflow:
+Branch structure:
 
 Main branch:
 
-- Stable production code
+- Production-ready code
+
+Develop branch:
+
+- Integration branch
 
 Feature branches:
 
-- Development work
-- Testing changes before merge
+- Individual feature development
 
 Workflow:
 
 ```text
 Feature Branch
       ↓
-Pull Request
+Develop Branch
       ↓
 GitHub Actions Tests
       ↓
-Merge to Main
+Main Branch
       ↓
-Deployment Triggered
+Deployment
 ```
 
 ---
 
-## Running Locally
-
-Clone repository:
-
-```bash
-git clone https://github.com/rossatuai/sentiment-mlops-pipeline.git
-```
-
-Move into project:
-
-```bash
-cd sentiment-mlops-pipeline
-```
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Train model:
-
-```bash
-python train.py
-```
-
-Run API:
-
-```bash
-python app.py
-```
-
----
-
-## Example API Request
+# Example API Request
 
 Input:
 
 ```json
 {
-    "text":"This product is amazing"
+    "text":"I love this movie"
 }
 ```
 
@@ -386,33 +379,25 @@ Output:
 
 ```json
 {
-    "prediction":"Positive"
+    "prediction":"positive"
 }
 ```
 
 ---
 
-## Future Improvements
-
-Potential enhancements:
+# Future Improvements
 
 - Prometheus monitoring
 - Grafana dashboards
 - Drift detection
-- Multiple model comparisons
-- Cloud deployment (AWS/GCP)
-- Automatic rollback on failed deployment
+- Cloud deployment
+- Automatic rollback
 
 ---
 
-## Author
+# Author
 
-Ross M
+Ross Moroney
+L00196752
 
 Big Data Analytics – MLOps Assessment Project
-
----
-
-## License
-
-Educational use only.
