@@ -404,6 +404,6 @@ Output:
 Ross Moroney
 L00196752
 
-Big Data Analytics – MLOps Assessment Project CA3
+Big Data Architecture – MLOps Assessment Project CA3
 Submission Date: 24/5/2026
 
