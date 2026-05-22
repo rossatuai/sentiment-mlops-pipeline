@@ -2,7 +2,7 @@
 
 End-to-end MLOps pipeline for sentiment analysis demonstrating automation across the complete machine learning lifecycle using GitHub Actions, MLflow, Docker, Kubernetes (Kind), and ArgoCD.
 
-The project focuses on MLOps practices including Continuous Integration (CI), Continuous Delivery (CD), Continuous Training (CT), experiment tracking, deployment automation, and model monitoring.
+The project focuses on MLOps practices, including Continuous Integration (CI), Continuous Deployment (CD), Continuous Training (CT), experiment tracking, deployment automation, and model monitoring.
 
 ---
 
@@ -28,7 +28,7 @@ The system performs sentiment classification on text reviews while automating:
 
 # Final Architecture Workflow
 
-```text
+
 Developer
     ↓
 GitHub Repository
@@ -47,22 +47,28 @@ Model Evaluation
     ↓
 Performance Threshold Check
 
-      Accuracy < 0.80 ?
+      Accuracy < 0.80 ?  ────────────
+                                    |
+      ↓ YES                         ↓ NO
 
-      ↓ YES                        ↓ NO
-
-Automatic Retraining         Build Docker Image
-      ↓                             ↓
-Train Updated Model          Push to DockerHub
-      ↓                             ↓
-Log Results to MLflow        Update Kubernetes Manifest
-      ↓                             ↓
-      └────────────→ ArgoCD Detects Changes
-                                  ↓
-                        Sync Kind Cluster
-                                  ↓
+Automatic Retraining        
+      ↓                           
+Train Updated Model          
+      ↓                           
+Log Results to MLflow        
+      ↓                             
+      └────────────→         Build Docker Image
+                                    ↓
+                            Push to DockerHub
+                                    ↓
+                            Update Kubernetes Manifest
+                                    ↓
+                            ArgoCD Detects Changes
+                                    ↓
+                            Sync Kind Cluster
+                                    ↓
                            Flask API Updated
-```
+
 
 ---
 
@@ -96,8 +102,7 @@ Log Results to MLflow        Update Kubernetes Manifest
 
 # Repository Structure
 
-```text
-Sentiment-Small/
+sentiment-mlops-pipeline/
 
 ├── .github/
 │   └── workflows/
@@ -110,6 +115,10 @@ Sentiment-Small/
 ├── app/
 │   ├── app.py
 │   └── __init__.py
+|
+├── data/
+│   └── raw/
+│       └── imdb_dataset.csv
 │
 ├── src/
 │   ├── preprocess.py
@@ -134,9 +143,11 @@ Sentiment-Small/
 │   └── argocd-app.yaml
 │
 ├── Dockerfile
+├── deployment.yaml
+├── service.yaml
 ├── requirements.txt
 └── README.md
-```
+
 
 ---
 
@@ -164,7 +175,6 @@ Outputs:
 - Accuracy score
 - Performance metrics
 
-The focus of this project is on model operationalization rather than model optimization.
 
 ---
 
@@ -177,6 +187,7 @@ MLflow tracks:
 - Training runs
 - Model artifacts
 - Retraining status
+
 
 Run locally:
 
@@ -220,7 +231,7 @@ Purpose:
 
 ---
 
-# Continuous Delivery (CD)
+# Continuous Deployment (CD)
 
 After successful workflow execution:
 
@@ -244,7 +255,6 @@ THRESHOLD = 0.80
 
 Workflow:
 
-```text
 Evaluate Model
       ↓
 Accuracy below threshold?
@@ -256,19 +266,18 @@ Trigger Retraining
 Log metrics to MLflow
       ↓
 Deploy updated model
-```
+
 
 Retraining also runs automatically every:
 
-```text
-6 hours
-```
+- 6 hours*
+*adjustable in code
 
----
 
-# Model Artifact Storage
 
-A dedicated workflow stores trained model artifacts.
+# Model Artefact Storage
+
+A dedicated workflow stores trained model artefacts.
 
 Stored artifacts:
 
@@ -285,11 +294,14 @@ Purpose:
 
 # Kubernetes Deployment
 
-The application is deployed through:
+The application is deployed using:
 
-- Deployment
-- Service
-- Kind Cluster
+- Docker containerisation
+- Kubernetes Deployment
+- Kubernetes Service
+- Kind Kubernetes cluster
+- ArgoCD for GitOps synchronisation
+
 
 Useful commands:
 
@@ -305,14 +317,6 @@ Check resources:
 kubectl get all
 ```
 
-Demonstrate self-healing:
-
-```bash
-kubectl delete pod <pod-name>
-```
-
-Kubernetes automatically recreates deleted pods.
-
 ---
 
 # GitOps with ArgoCD
@@ -327,7 +331,7 @@ When deployment manifests change:
 
 Benefits:
 
-- Git becomes source of truth
+- Git becomes the source of truth
 - Automated deployment
 - Easy rollback capability
 
@@ -349,9 +353,9 @@ Feature branches:
 
 - Individual feature development
 
+
 Workflow:
 
-```text
 Feature Branch
       ↓
 Develop Branch
@@ -361,7 +365,7 @@ GitHub Actions Tests
 Main Branch
       ↓
 Deployment
-```
+
 
 ---
 
@@ -400,4 +404,6 @@ Output:
 Ross Moroney
 L00196752
 
-Big Data Analytics – MLOps Assessment Project
+Big Data Analytics – MLOps Assessment Project CA3
+Submission Date: 24/5/2026
+
