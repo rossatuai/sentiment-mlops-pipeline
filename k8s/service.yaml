@@ -2,15 +2,22 @@ apiVersion: v1
 kind: Service
 
 metadata:
+  # Name of Kubernetes service
   name: sentiment-api-service
 
 spec:
+  # Connects service to matching pods
   selector:
     app: sentiment-api
 
   ports:
     - protocol: TCP
+
+      # External service port
       port: 80
+
+      # Port used inside container
       targetPort: 5000
 
+  # Makes application accessible outside cluster
   type: NodePort

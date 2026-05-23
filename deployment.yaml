@@ -2,9 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
+  # Name of Kubernetes deployment
   name: sentiment-api-deployment
 
 spec:
+  # Number of application instances
   replicas: 1
 
   selector:
@@ -18,9 +20,16 @@ spec:
 
     spec:
       containers:
+
+      # Container settings
       - name: sentiment-api
+
+        # Docker image used for deployment
         image: sentiment-api:latest
+
+        # Uses local image instead of pulling from registry
         imagePullPolicy: Never
 
         ports:
+        # Flask application runs on port 5000
         - containerPort: 5000

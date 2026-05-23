@@ -5,32 +5,37 @@ on:
     branches:
       - main
       - develop
-      - 'feature/*'
+      - 'feature/*'   # Runs for all feature branches
 
 jobs:
   tests:
     runs-on: ubuntu-latest
 
     steps:
+
+    # Gets latest repository files
     - name: Checkout Repository
       uses: actions/checkout@v4
 
+    # Sets up Python environment
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.11'
 
+    # Installs required packages
     - name: Install Dependencies
       run: |
         pip install -r requirements.txt
 
-
+    # Runs unit tests using pytest
     - name: Run Pytest
       run: pytest
 
+    # Runs data preprocessing
     - name: Preprocess Data
       run: python src/preprocess.py
 
+    # Trains machine learning model
     - name: Train Model
       run: python src/train.py
-

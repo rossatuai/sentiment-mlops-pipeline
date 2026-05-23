@@ -1,3 +1,4 @@
+# Import required libraries
 import pandas as pd
 import joblib
 import json
@@ -37,7 +38,7 @@ X = df["cleaned_review"]
 y = df["sentiment"]
 
 
-# Vectorization
+# Convert text into numerical features
 vectorizer = TfidfVectorizer(
     max_features=5000
 )
@@ -45,7 +46,7 @@ vectorizer = TfidfVectorizer(
 X_vectorized = vectorizer.fit_transform(X)
 
 
-# Split data
+# Split data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(
     X_vectorized,
     y,
@@ -54,22 +55,23 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 
-# Train model
+# Create machine learning model
 model = LogisticRegression()
 
+# Train model
 model.fit(
     X_train,
     y_train
 )
 
 
-# Predictions
+# Generate predictions
 predictions = model.predict(
     X_test
 )
 
 
-# Metrics
+# Calculate performance metrics
 accuracy = accuracy_score(
     y_test,
     predictions
@@ -82,7 +84,7 @@ f1 = f1_score(
 )
 
 
-# Log to MLflow
+# Log information to MLflow
 with mlflow.start_run():
 
     mlflow.log_param(
@@ -95,17 +97,19 @@ with mlflow.start_run():
         5000
     )
 
+    # Save accuracy metric
     mlflow.log_metric(
         "accuracy",
         accuracy
     )
 
+    # Save F1 score metric
     mlflow.log_metric(
         "f1_score",
         f1
     )
 
-    # Log model artifact safely
+    # Save model as MLflow artifact
     try:
 
         mlflow.sklearn.log_model(
@@ -122,17 +126,19 @@ with mlflow.start_run():
         )
 
 
-# Save local model files
+# Create models folder if missing
 os.makedirs(
     "models",
     exist_ok=True
 )
 
+# Save trained model
 joblib.dump(
     model,
     "models/sentiment_model.pkl"
 )
 
+# Save vectorizer
 joblib.dump(
     vectorizer,
     "models/tfidf_vectorizer.pkl"
