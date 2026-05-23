@@ -1,6 +1,7 @@
 name: MLOps Pipeline
 
 on:
+  # Runs after Unit Tests workflow finishes
   workflow_run:
     workflows: ["Unit Tests"]
     types:
@@ -10,28 +11,34 @@ jobs:
 
   build-and-test:
 
+    # Only runs if unit tests passed successfully
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     runs-on: ubuntu-latest
 
     steps:
 
+    # Gets latest repository files
     - name: Checkout Repository
       uses: actions/checkout@v4
 
+    # Sets up Python environment
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: "3.11"
 
+    # Installs required packages
     - name: Install Dependencies
       run: |
         pip install -r requirements.txt
 
+    # Builds Docker image for the application
     - name: Build Docker Image
       run: |
         docker build -t sentiment-api .
 
+    # Checks if Docker image was created successfully
     - name: Verify Docker Image
       run: |
         docker images
