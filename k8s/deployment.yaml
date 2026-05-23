@@ -26,7 +26,7 @@ spec:
 
 
         # Docker image used for deployment
-        image: rossatuai/sentiment-api:51
+        image: rossatuai/sentiment-api:52
         
         # Always checks for latest image version
         imagePullPolicy: Always
