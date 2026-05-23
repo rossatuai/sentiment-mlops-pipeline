@@ -2,8 +2,10 @@ name: Automatic Retraining
 
 on:
   schedule:
+    # Runs automatically every 6 hours
     - cron: '0 */6 * * *'
 
+  # Allows the workflow to be run manually from GitHub Actions
   workflow_dispatch:
 
 jobs:
@@ -13,22 +15,28 @@ jobs:
 
     steps:
 
+      # Gets the latest version of the repository
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      # Sets up Python environment
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
+      # Installs required Python packages
       - name: Install Dependencies
         run: pip install -r requirements.txt
 
+      # Creates validation/preprocessed data
       - name: Generate Validation Data
         run: python src/preprocess.py
 
+      # Trains the machine learning model
       - name: Train Model
         run: python src/train.py
 
+      # Checks model performance and retrains if needed
       - name: Run Monitoring and Retraining Script
         run: python src/monitor_and_retrain.py
