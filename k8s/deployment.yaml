@@ -24,9 +24,10 @@ spec:
       # Container configuration
       - name: sentiment-api
 
-        # Docker image used for deployment
-        image: rossatuai/sentiment-api:47
 
+        # Docker image used for deployment
+        image: rossatuai/sentiment-api:50
+        
         # Always checks for latest image version
         imagePullPolicy: Always
 
