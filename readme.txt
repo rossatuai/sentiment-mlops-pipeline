@@ -391,11 +391,11 @@ Output:
 
 # Future Improvements
 
-- Prometheus monitoring
-- Grafana dashboards
-- Drift detection
-- Cloud deployment
-- Automatic rollback
+- Add Prometheus for real-time monitoring
+- Add Grafana dashboards for visual metrics
+- Implement model drift detection
+- Deploy to a cloud platform (AWS, Azure or GCP)
+- Add automatic rollback for failed deployments
 
 ---
 

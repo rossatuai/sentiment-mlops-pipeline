@@ -2,22 +2,38 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 
 metadata:
+  # Name of ArgoCD application
   name: sentiment-api
+
+  # Namespace where ArgoCD is running
   namespace: argocd
 
 spec:
+  # Uses default ArgoCD project
   project: default
 
   source:
+    # GitHub repository containing Kubernetes files
     repoURL: https://github.com/rossatuai/sentiment-mlops-pipeline.git
+
+    # Branch to monitor for changes
     targetRevision: main
+
+    # Folder containing Kubernetes manifests
     path: k8s
 
   destination:
+    # Deploy to current Kubernetes cluster
     server: https://kubernetes.default.svc
+
+    # Deploy into default namespace
     namespace: default
 
   syncPolicy:
     automated:
+
+      # Removes old resources no longer needed
       prune: true
+
+      # Fixes manual changes automatically
       selfHeal: true
